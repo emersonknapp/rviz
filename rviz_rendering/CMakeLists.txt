@@ -28,15 +28,15 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 
-# Qt5 boilerplate options from http://doc.qt.io/qt-5/cmake-manual.html
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_AUTOMOC ON)
+# # Qt5 boilerplate options from http://doc.qt.io/qt-5/cmake-manual.html
+# set(CMAKE_INCLUDE_CURRENT_DIR ON)
+# set(CMAKE_AUTOMOC ON)
 
 # do find_package(rviz_ogre_vendor) first to make sure the custom OGRE is found
 find_package(rviz_ogre_vendor REQUIRED)
 find_package(rviz_assimp_vendor REQUIRED)
 
-find_package(Qt5 REQUIRED COMPONENTS Widgets)
+# find_package(Qt5 REQUIRED COMPONENTS Widgets)
 
 find_package(ament_index_cpp REQUIRED)
 find_package(Eigen3 REQUIRED)
@@ -109,7 +109,7 @@ add_library(rviz_rendering SHARED
 target_link_libraries(rviz_rendering
   rviz_ogre_vendor::OgreMain
   rviz_ogre_vendor::OgreOverlay
-  Qt5::Widgets
+  # Qt5::Widgets
   ament_index_cpp::ament_index_cpp
   resource_retriever::resource_retriever
 )
@@ -162,7 +162,7 @@ install(DIRECTORY "${CMAKE_SOURCE_DIR}/ogre_media"
   DESTINATION "share/${PROJECT_NAME}"
   USE_SOURCE_PERMISSIONS)
 
-if(BUILD_TESTING)
+if(FALSE)
   # TODO(wjwwood): replace this with ament_lint_auto() and/or add the copyright linter back
   find_package(ament_cmake_cppcheck REQUIRED)
   find_package(ament_cmake_cpplint REQUIRED)
@@ -188,7 +188,7 @@ if(BUILD_TESTING)
     target_link_libraries(point_cloud_test_target
       rviz_ogre_vendor::OgreMain
       rviz_rendering
-      Qt5::Widgets  # explicitly do this for include directories (not necessary for external use)
+      # Qt5::Widgets  # explicitly do this for include directories (not necessary for external use)
     )
   endif()
 
@@ -199,7 +199,7 @@ if(BUILD_TESTING)
     target_link_libraries(point_cloud_renderable_test_target
       rviz_ogre_vendor::OgreMain
       rviz_rendering
-      Qt5::Widgets  # explicitly do this for include directories (not necessary for external use)
+      # Qt5::Widgets  # explicitly do this for include directories (not necessary for external use)
     )
   endif()
 
@@ -210,7 +210,7 @@ if(BUILD_TESTING)
     target_link_libraries(billboard_line_test_target
       rviz_ogre_vendor::OgreMain
       rviz_rendering
-      Qt5::Widgets  # explicitly do this for include directories (not necessary for external use)
+      # Qt5::Widgets  # explicitly do this for include directories (not necessary for external use)
     )
   endif()
 
