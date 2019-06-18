@@ -39,7 +39,7 @@
 #include <OgreVector3.h>
 #include <OgreViewport.h>
 
-#include "rviz_rendering/render_window.hpp"
+// #include "rviz_rendering/render_window.hpp"
 
 namespace rviz_rendering
 {
@@ -52,8 +52,10 @@ std::pair<bool, Ogre::Vector3> ViewportProjectionFinder::getViewportPointProject
 }
 
 std::pair<bool, Ogre::Vector3> ViewportProjectionFinder::getViewportProjectionOnPlane(
-  RenderWindow * render_window, int x, int y, Ogre::Plane & plane)
+  // RenderWindow * render_window, int x, int y, Ogre::Plane & plane)
+  RenderWindow * , int , int , Ogre::Plane & )
 {
+  /*
   auto viewport = RenderWindowOgreAdapter::getOgreViewport(render_window);
   int width = viewport->getActualWidth();
   int height = viewport->getActualHeight();
@@ -68,6 +70,8 @@ std::pair<bool, Ogre::Vector3> ViewportProjectionFinder::getViewportProjectionOn
 
   auto intersection_point = mouse_ray.getPoint(intersection.second);
   return {true, intersection_point};
+  */
+  return {false, Ogre::Vector3()};
 }
 
 }  // namespace rviz_rendering

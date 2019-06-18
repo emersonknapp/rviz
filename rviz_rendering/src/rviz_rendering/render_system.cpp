@@ -375,9 +375,11 @@ void RenderSystem::addAdditionalResourcesFromAmentIndex() const
         string_helper::splitStringIntoTrimmedItems(content, '\n');
       for (const auto & line : filenames) {
         std::string resource_path = prefix_path + "/share/" + line;
+        /*
         if (!QDir(QString::fromStdString(resource_path)).exists()) {
           RVIZ_RENDERING_LOG_WARNING_STREAM("Could not find folder " << resource_path);
         }
+        */
         Ogre::ResourceGroupManager::getSingleton().addResourceLocation(resource_path, "FileSystem",
           "rviz_rendering");
       }

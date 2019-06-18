@@ -43,10 +43,6 @@
 #include <OgreTextureManager.h>
 #include <OgreVector3.h>
 
-#include <QDir>  // NOLINT cpplint cannot handle include order here
-#include <QFileInfo>  // NOLINT cpplint cannot handle include order here
-#include <QString>  // NOLINT cpplint cannot handle include order here
-
 #define ASSIMP_UNIFIED_HEADER_NAMES 1
 #if defined(ASSIMP_UNIFIED_HEADER_NAMES)
 #include <assimp/Importer.hpp>
@@ -64,8 +60,10 @@
 
 #include "resource_retriever/retriever.h"
 
-#include "src/rviz_rendering/mesh_loader_helpers/assimp_loader.hpp"
-#include "src/rviz_rendering/mesh_loader_helpers/stl_loader.hpp"
+// #include "src/rviz_rendering/mesh_loader_helpers/assimp_loader.hpp"
+// #include "src/rviz_rendering/mesh_loader_helpers/stl_loader.hpp"
+#include "mesh_loader_helpers/assimp_loader.hpp"
+#include "mesh_loader_helpers/stl_loader.hpp"
 #include "rviz_rendering/logging.hpp"
 
 #define ROS_PACKAGE_NAME "rviz_rendering"
@@ -92,6 +90,7 @@ Ogre::MeshPtr loadMeshFromResource(const std::string & resource_path)
   if (Ogre::MeshManager::getSingleton().resourceExists(resource_path, ROS_PACKAGE_NAME)) {
     return Ogre::MeshManager::getSingleton().getByName(resource_path, ROS_PACKAGE_NAME);
   } else {
+    /*
     QFileInfo model_path(QString::fromStdString(resource_path));
     std::string ext = model_path.completeSuffix().toStdString();
     if (ext == "mesh" || ext == "MESH") {
@@ -135,6 +134,7 @@ Ogre::MeshPtr loadMeshFromResource(const std::string & resource_path)
 
       return assimp_loader.meshFromAssimpScene(resource_path, scene);
     }
+    */
   }
 }
 

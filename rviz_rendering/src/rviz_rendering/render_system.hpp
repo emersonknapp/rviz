@@ -38,8 +38,6 @@
 #include <Overlay/OgreOverlaySystem.h>  // NOLINT cpplint cannot handle include order here
 #include <RenderSystems/GL/OgreGLPlugin.h>  // NOLINT cpplint cannot handle include order here
 
-#include <QDir>  // NOLINT cpplint cannot handle include order here
-
 #include "rviz_rendering/visibility_control.hpp"
 
 namespace rviz_rendering

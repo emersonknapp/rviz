@@ -280,7 +280,7 @@ std::vector<Ogre::MaterialPtr> AssimpLoader::loadMaterials(
 }
 
 void AssimpLoader::setLightColorsFromAssimp(
-  const std::string & resource_path,
+  const std::string & /* resource_path */,
   Ogre::MaterialPtr & mat,
   const aiMaterial * ai_material,
   MaterialInternals & material_internals)
@@ -296,12 +296,14 @@ void AssimpLoader::setLightColorsFromAssimp(
       ai_material->GetTexture(aiTextureType_DIFFUSE, 0, &texture_name, &mapping, &uv_index);
 
       // Assume textures are in paths relative to the mesh
+      /*
       QFileInfo resource_path_finfo(QString::fromStdString(resource_path));
       QDir resource_path_qdir = resource_path_finfo.dir();
       std::string texture_path = resource_path_qdir.path().toStdString() + "/" + texture_name.data;
       loadTexture(texture_path);
       Ogre::TextureUnitState * tu = material_internals.pass_->createTextureUnitState();
       tu->setTextureName(texture_path);
+      */
     } else if (propKey == "$clr.diffuse") {
       aiColor3D clr;
       ai_material->Get(AI_MATKEY_COLOR_DIFFUSE, clr);
@@ -359,6 +361,8 @@ void AssimpLoader::loadTexture(const std::string & resource_path)
     if (res.size != 0) {
       Ogre::DataStreamPtr stream(new Ogre::MemoryDataStream(res.data.get(), res.size));
       Ogre::Image image;
+      (void)resource_path;
+      /*
       QFileInfo resource_path_finfo(QString::fromStdString(resource_path));
       std::string extension = resource_path_finfo.completeSuffix().toStdString();
 
@@ -373,6 +377,7 @@ void AssimpLoader::loadTexture(const std::string & resource_path)
         RVIZ_RENDERING_LOG_ERROR_STREAM(
           "Could not load texture [" << resource_path.c_str() << "]: " << e.what());
       }
+      */
     }
   }
 }

@@ -8,7 +8,7 @@ if(NOT CMAKE_CXX_STANDARD)
 endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  add_compile_options(-Wall -Wextra -Wpedantic -Werror)
+  add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
 # Tests currently only run on OS X @ OSRF jenkins
@@ -70,9 +70,9 @@ if(Qt5_FOUND AND WIN32 AND TARGET Qt5::qmake AND NOT TARGET Qt5::windeployqt)
 endif()
 
 # These need to be added in the add_library() call so AUTOMOC detects them.
-set(headers_with_q_object
-  include/rviz_rendering/render_window.hpp
-)
+# set(headers_with_q_object
+#   include/rviz_rendering/render_window.hpp
+# )
 
 add_library(rviz_rendering SHARED
   ${headers_with_q_object}
@@ -83,10 +83,10 @@ add_library(rviz_rendering SHARED
   src/rviz_rendering/material_manager.cpp
   src/rviz_rendering/mesh_loader.cpp
   src/rviz_rendering/ogre_logging.cpp
-  src/rviz_rendering/ogre_render_window_impl.cpp
+  # src/rviz_rendering/ogre_render_window_impl.cpp
   src/rviz_rendering/orthographic.cpp
   src/rviz_rendering/render_system.cpp
-  src/rviz_rendering/render_window.cpp
+  # src/rviz_rendering/render_window.cpp
   src/rviz_rendering/resource_config.cpp
   src/rviz_rendering/mesh_loader_helpers/stl_loader.cpp
   src/rviz_rendering/mesh_loader_helpers/assimp_loader.cpp
@@ -102,7 +102,7 @@ add_library(rviz_rendering SHARED
   src/rviz_rendering/objects/point_cloud.cpp
   src/rviz_rendering/objects/point_cloud_renderable.cpp
   src/rviz_rendering/objects/shape.cpp
-  test/rviz_rendering/ogre_testing_environment.cpp
+  # test/rviz_rendering/ogre_testing_environment.cpp
   test/rviz_rendering/scene_graph_introspection.cpp
 )
 
