@@ -11,6 +11,11 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+set(LIBRARY_TYPE SHARED)
+if(EMSCRIPTEN)
+  set(LIBRARY_TYPE STATIC)
+endif()
+
 # Tests currently only run on OS X @ OSRF jenkins
 # Enable on Linux by providing a display, enable on Windows via EnableDisplayTests=True
 option(EnableDisplayTests "EnableDisplayTests")
@@ -74,7 +79,7 @@ endif()
 #   include/rviz_rendering/render_window.hpp
 # )
 
-add_library(rviz_rendering SHARED
+add_library(rviz_rendering ${LIBRARY_TYPE} 
   ${headers_with_q_object}
   src/rviz_rendering/apply_visibility_bits.cpp
   src/rviz_rendering/geometry.cpp
