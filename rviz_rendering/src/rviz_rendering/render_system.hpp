@@ -36,8 +36,11 @@
 
 #include <OgreRoot.h>
 #include <Overlay/OgreOverlaySystem.h>  // NOLINT cpplint cannot handle include order here
-#include <RenderSystems/GL/OgreGLPlugin.h>  // NOLINT cpplint cannot handle include order here
-
+#ifdef EMSCRIPTEN
+#  include <RenderSystems/GLES2/OgreGLES2Plugin.h>  // NOLINT cpplint cannot handle include order here
+#else
+#  include <RenderSystems/GL/OgreGLPlugin.h>  // NOLINT cpplint cannot handle include order here
+#endif
 /*
 #include <QDir>  // NOLINT cpplint cannot handle include order here
 */
@@ -54,6 +57,12 @@ public:
   typedef size_t WindowIDType;
 #else
   typedef unsigned long WindowIDType;  // NOLINT: we need to use C longs here
+#endif
+
+#ifdef EMSCRIPTEN
+  typedef Ogre::GLES2Plugin OgreGLPlugin;
+#else
+  typedef OGRE::GLPlugin OgreGLPlugin;
 #endif
 
   RVIZ_RENDERING_PUBLIC
@@ -135,7 +144,7 @@ private:
   void
   detectGlVersion();
 
-  static Ogre::GLPlugin * render_system_gl_plugin_;
+  static OgreGLPlugin * render_system_gl_plugin_;
 
   static RenderSystem * instance_;
 

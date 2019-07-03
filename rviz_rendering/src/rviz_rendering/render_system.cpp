@@ -58,7 +58,7 @@
 namespace rviz_rendering
 {
 
-Ogre::GLPlugin * RenderSystem::render_system_gl_plugin_ = nullptr;
+RenderSystem::OgreGLPlugin * RenderSystem::render_system_gl_plugin_ = nullptr;
 RenderSystem * RenderSystem::instance_ = nullptr;
 int RenderSystem::force_gl_version_ = 0;
 bool RenderSystem::force_no_stereo_ = false;
@@ -189,6 +189,8 @@ RenderSystem::loadOgrePlugins()
   std::string plugin_prefix = get_ogre_plugin_directory();
 #if defined _WIN32 && !NDEBUG
   ogre_root_->loadPlugin(plugin_prefix + "RenderSystem_GL_d");
+#elif defined EMSCRIPTEN
+  ogre_root_->loadPlugin(plugin_prefix + "RenderSystem_GLES2");
 #else
   ogre_root_->loadPlugin(plugin_prefix + "RenderSystem_GL");
 #endif
