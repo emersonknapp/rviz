@@ -43,6 +43,12 @@
 #include <OgreTextureManager.h>
 #include <OgreVector3.h>
 
+/*
+#include <QDir>  // NOLINT cpplint cannot handle include order here
+#include <QFileInfo>  // NOLINT cpplint cannot handle include order here
+#include <QString>  // NOLINT cpplint cannot handle include order here
+*/
+
 #define ASSIMP_UNIFIED_HEADER_NAMES 1
 #if defined(ASSIMP_UNIFIED_HEADER_NAMES)
 #include <assimp/Importer.hpp>

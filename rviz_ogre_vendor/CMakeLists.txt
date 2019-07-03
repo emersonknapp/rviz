@@ -39,8 +39,9 @@ macro(build_freetype)
 
   include(ExternalProject)
   ExternalProject_Add(freetype-2.8.1
-    URL https://git.savannah.gnu.org/cgit/freetype/freetype2.git/snapshot/freetype2-VER-2-6-5.tar.gz
-    URL_MD5 0dd62a0125895431e074a3df29f94d69
+    URL https://download.savannah.gnu.org/releases/freetype/freetype-2.9.tar.gz
+    # URL https://git.savannah.gnu.org/cgit/freetype/freetype2.git/snapshot/freetype2-VER-2-6-5.tar.gz
+    # URL_MD5 0dd62a0125895431e074a3df29f94d69
     TIMEOUT 600
     LOG_CONFIGURE ${should_log}
     LOG_BUILD ${should_log}
@@ -124,12 +125,15 @@ macro(build_ogre)
   list(APPEND extra_cmake_args "-DOGRE_BUILD_RENDERSYSTEM_D3D9:BOOL=OFF")
   list(APPEND extra_cmake_args "-DCMAKE_CXX_FLAGS=${OGRE_CXX_FLAGS}")
 
+  list(APPEND extra_cmake_args "-DCMAKE_FIND_ROOT_PATH=${CMAKE_FIND_ROOT_PATH}")
+
   # Uncomment this line to enable the GL3PLUS render engine
   # list(APPEND extra_cmake_args "-DOGRE_BUILD_RENDERSYSTEM_GL3PLUS:BOOL=TRUE")
 
   # These next lines can be used to disable some of the components or plugins for OGRE
   # list(APPEND extra_cmake_args "-DOGRE_BUILD_COMPONENT_BITES:BOOL=OFF")
   # list(APPEND extra_cmake_args "-DOGRE_BUILD_COMPONENT_HLMS:BOOL=ON")
+  list(APPEND extra_cmake_args "-DOGRE_BUILD_COMPONENT_OVERLAY:BOOL=ON")
   list(APPEND extra_cmake_args "-DOGRE_CONFIG_ENABLE_ZIP:BOOL=ON")
 
   if(BUILDING_FREETYPE_LOCALLY)
@@ -156,10 +160,11 @@ macro(build_ogre)
     LOG_CONFIGURE ${should_log}
     LOG_BUILD ${should_log}
     CMAKE_ARGS
-      -DOGRE_STATIC:BOOL=OFF
-      -DOGRE_DEPENDENCIES_DIR=${CMAKE_CURRENT_BINARY_DIR}/ogredeps
+      -DOGRE_STATIC:BOOL=ON
+      -DOGRE_BUILD_DEPENDENCIES:BOOL=ON
+      # -DOGRE_DEPENDENCIES_DIR=${CMAKE_CURRENT_BINARY_DIR}/ogredeps
       -DOGRE_INSTALL_PDB:BOOL=OFF
-      -DOGRE_BUILD_DEPENDENCIES:BOOL=OFF
+      # -DOGRE_BUILD_DEPENDENCIES:BOOL=OFF
       -DOGRE_BUILD_TESTS:BOOL=OFF
       -DOGRE_BUILD_SAMPLES:BOOL=ON
       -DOGRE_INSTALL_SAMPLES:BOOL=ON
@@ -173,10 +178,10 @@ macro(build_ogre)
   )
 
   if(BUILDING_FREETYPE_LOCALLY)
-    add_dependencies(ogre-master-ca665a6 freetype-2.8.1)
+    # add_dependencies(ogre-master-ca665a6 freetype-2.8.1)
   endif()
   if(BUILDING_ZLIB_LOCALLY)
-    add_dependencies(ogre-master-ca665a6 zlib-1.2.11)
+    # add_dependencies(ogre-master-ca665a6 zlib-1.2.11)
   endif()
 
   # The external project will install to the build folder, but we'll install that on make install.
@@ -189,10 +194,10 @@ macro(build_ogre)
 endmacro()
 
 if(BUILDING_FREETYPE_LOCALLY)
-  build_freetype()
+  # build_freetype()
 endif()
 if(BUILDING_ZLIB_LOCALLY)
-  build_zlib()
+  # build_zlib()
 endif()
 
 build_ogre()
