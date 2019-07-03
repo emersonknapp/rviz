@@ -197,7 +197,7 @@ if(BUILDING_FREETYPE_LOCALLY)
   # build_freetype()
 endif()
 if(BUILDING_ZLIB_LOCALLY)
-  # build_zlib()
+  build_zlib()
 endif()
 
 build_ogre()
